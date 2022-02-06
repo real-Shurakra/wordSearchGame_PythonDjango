@@ -1,46 +1,84 @@
-<table class="table">
-    <tbody>
-        <tr>
-            <td id="00"></td>
-            <td id="01"></td>
-            <td id="02"></td>
-            <td id="03"></td>
-            <td id="04"></td>
-        </tr>
-        <tr>
-            <td id="10"></td>
-            <td id="11"></td>
-            <td id="12"></td>
-            <td id="13"></td>
-            <td id="14"></td>
-        </tr>
-        <tr>
-            <td id="20"></td>
-            <td id="21"></td>
-            <td id="22"></td>
-            <td id="23"></td>
-            <td id="24"></td>
-        </tr>
-        <tr>
-            <td id="30"></td>
-            <td id="31"></td>
-            <td id="32"></td>
-            <td id="33"></td>
-            <td id="34"></td>
-        </tr>
-        <tr>
-            <td id="40"></td>
-            <td id="41"></td>
-            <td id="42"></td>
-            <td id="43"></td>
-            <td id="44"></td>
-        </tr>
-        <tr>
-            <td id="50"></td>
-            <td id="51"></td>
-            <td id="52"></td>
-            <td id="53"></td>
-            <td id="54"></td>
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+
+    <div class="col-xl-12" id="currentRound"><p>Runde 1 / 6</p></div>
+
+    <div class="col-xl-2"></div>
+    <div class="col-xl-8">
+        <table class="table-bordered">
+            <tbody>
+                <tr id="RoundNr0">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr id="RoundNr1">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr id="RoundNr2">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr id="RoundNr3">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr id="RoundNr4">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr id="RoundNr5">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xl-2"></div>
+
+    <div class="col-xl-12">
+        <div class="row">
+
+            <div class="col-xl-3"></div>
+            <div class="col-xl-6">
+
+                <input type="text" class="form-control" id="wordInput" maxlength="5" list="wordInputDatalist">
+                <datalist id="wordInputDatalist"></datalist>
+
+            </div>
+            <div class="col-xl-3"></div>
+
+        </div>
+    </div>
+    <div class="col-xl-12">
+        <div class="row">
+
+            <div class="col-xl-5"></div>
+            <div class="col-xl-2 text-center">
+
+                <button id="btnNewGame" type="button" class="btn btn-warning" onclick="location.reload();">Neues Spiel</button>
+
+            </div>
+            <div class="col-xl-5"></div>
+
+        </div>
+    </div>
+
+</div>

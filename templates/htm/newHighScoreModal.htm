@@ -1,0 +1,45 @@
+<!-- The Modal -->
+<div class="modal" id="gameWonModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header dark-Modal">
+                <h4 class="modal-title"><p>Spiel gewonnen</p></h4>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body dark-Modal">
+                <p>Herzlichen Glückwunsch.</p>
+                <p>Ihr Ergebnis ist:</p>
+                <table class="table-borderles">
+                    <tbody>
+                        <tr>
+                            <td><p>Wort:</p></td>
+                            <td id="wonModalWord"></td>
+                        </tr>
+                        <tr>
+                            <td><p>Zeit:</p></td>
+                            <td id="wonModalTime"></td>
+                        </tr>
+                        <tr>
+                            <td><p>Runden:</p></td>
+                            <td id="wonModalRounds"></td>
+                        </tr>
+                        <tr>
+                            <td><p>Nickname:</p></td>
+                            <td><input type="text" class="form-control" id="wonModalUser" maxlength="3"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer dark-Modal">
+                <button id="saveHighScore" type="button" class="btn btn-success" data-dismiss="modal" disabled><p>Hochladen</p></button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><p>Abbrechen</p></button>
+            </div>
+
+        </div>
+    </div>
+</div>
