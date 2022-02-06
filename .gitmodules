@@ -1,0 +1,3 @@
+[submodule "static/wordSearchGame_PythonDjango/js/Notify"]
+	path = static/wordSearchGame_PythonDjango/js/Notify
+	url = https://github.com/real-Shurakra/Notify.git
