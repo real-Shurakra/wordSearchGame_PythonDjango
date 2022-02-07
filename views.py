@@ -52,20 +52,23 @@ def checkWord(request):
 @csrf_exempt
 def endGame(request):
     request.session['endTime'] = time.time()
-    data = {
-        'rc':True,
-        'rv':True
-    }
-    return JsonResponse(data)
+    temp = engine.Main()
+    data = temp.convertTime(request.session['startTime'], request.session['endTime'])
+    if data['rc']:
+        request.session['timeNeeded'] = data['rv']
+        data['rv']['searchWord'] = request.session['searchWord']
+        return JsonResponse(data)
+    else:
+        print(bc.ERRMSG, data['rv'], bc.END)
+        return HttpResponseServerError()
     
 @csrf_exempt
 def insertHighScore(request):
-    neededRounds = request.POST['neededRounds']
-    userName = request.POST['userName']
-    deltaTime = request.session['endTime'] - request.session['startTime']
-    seachWord = request.session['searchWord']
     temp = engine.Main()
-    data = temp.insertHighScore(neededRounds, userName, seachWord, deltaTime)
+    data = temp.insertHighScore(request.POST['neededRounds'], 
+                                request.POST['userName'], 
+                                request.session['searchWord'], 
+                                request.session['timeNeeded'])
     if data['rc']:
         return JsonResponse(data)
     else:

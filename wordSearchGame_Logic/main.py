@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 from wordSearchGame_PythonDjango.models import Words, Highscore
 import random
+import math
 
 class Main:
     
@@ -100,24 +101,48 @@ class Main:
             }
         finally:
             return answer
+   
+    def convertTime(self, timeStart, timeEnd):
         
-    def insertHighScore(self, neededRounds, userName, searchWord, deltaTime):
-        print('userName:', userName)
-        print('deltaTime:', deltaTime)
-        print('neededRounds:', neededRounds)
-        print('searchWord:', searchWord)
+        timeDeltaSec = '00'
+        timeDeltaMin = '00'
+        timeDeltaHr  = '00'
+        
+        basics = BasicFunctions()
+        timeDeltaMS = timeEnd - timeStart
+        timeDeltaSec = math.ceil(timeDeltaMS)
+        if timeDeltaSec >= 60:
+            timeDeltaMin = math.floor( timeDeltaSec / 60 )
+            timeDeltaSec = timeDeltaSec - ( timeDeltaMin *60 )
+            if timeDeltaMin >= 60:
+                timeDeltaHr = math.floor( timeDeltaMin / 60 )
+                timeDeltaMin = timeDeltaMin - ( timeDeltaHr * 60 )
+        timeDeltaSec = basics.intToTime(timeDeltaSec)
+        timeDeltaMin = basics.intToTime(timeDeltaMin)
+        timeDeltaHr  = basics.intToTime(timeDeltaHr )
+        
+        timeNeeded = {
+            'hour':timeDeltaHr,
+            'minute':timeDeltaMin,
+            'second':timeDeltaSec,
+        }
+        return {'rc':True,
+                'rv':timeNeeded}
+        
+    def insertHighScore(self, neededRounds, userName, searchWord, timeNeeded):
+        
+        timestamp = timeNeeded['hour'] + ':' + timeNeeded['minute'] + ':' + timeNeeded['second'] + '.00000'
         
         wordObject = Words.objects.get(description=searchWord)
         
-        newHighScore = Highscore(username = userName, time = deltaTime, rounds = neededRounds, word = wordObject)
+        newHighScore = Highscore(username = userName, time = str(timestamp), rounds = neededRounds, word = wordObject)
         newHighScore.save()
         return {
             'rc':True,
             'rv':True
         }
         
-    
-class DatabaseFunctions():
+class DatabaseFunctions:
     
     def getAllWords(self):
         wordList = []
@@ -126,4 +151,11 @@ class DatabaseFunctions():
             wordList.append(oneWordDB.description)
         return wordList
     
-
+class BasicFunctions:
+    
+    def intToTime(self, integer):
+        integer = int(integer)
+        if integer <= 9:
+            return str('0' + str(integer))
+        else:
+            return str(integer)
