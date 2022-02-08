@@ -198,7 +198,8 @@ class wordsearchGame {
 
     #getHighScoreList(){
         try{
-
+            let highScore_Result = this.#getDataFormURL('getHighScoreTopTenFromWord');
+            if (!highScore_Result['rc']){throw(highScore_Result['rv'])}
         }
         catch (error){
             console.error(error);
@@ -220,6 +221,9 @@ class wordsearchGame {
             let newWord = this.#getNewWord();
             if (!newWord['rc']){throw(newWord['rv'])}
             console.log('I didn\'t created this game for you to cheat! Take this and die: ' + newWord['rv']);
+            let getHighScoreList_Result = this.#getHighScoreList();
+            if (!getHighScoreList_Result['rc']){throw(getHighScoreList_Result['rv'])}
+            
         }
         catch (error){
             console.error(error);
@@ -281,6 +285,7 @@ class wordsearchGame {
             notify.showModal();
         }
     }
+
     wonModalCheckUsername(){
         try{
             let userName = document.getElementById('wonModalUser').value;
@@ -300,8 +305,7 @@ class wordsearchGame {
             notify.makeModal();
             notify.showModal();
         }
-    }
-    
+    }  
 
     wonModalInsertHighScore(){
         try{

@@ -141,6 +141,13 @@ class Main:
             'rc':True,
             'rv':True
         }
+  
+    def getHighScoreListForWord(searchWord):
+        htmlHighScore = """
+        """
+        searchWordObject = Words.objects.get(searchWord)
+        hightScores = Highscore.objects.filter(word = searchWordObject).order_by('rounds', 'time')
+        return
         
 class DatabaseFunctions:
     

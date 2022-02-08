@@ -77,4 +77,10 @@ def insertHighScore(request):
 
 @csrf_exempt
 def getHighScoreTopTenFromWord(request):
-    pass
+    temp = engine.Main()
+    data = temp.getHighScoreListForWord(request.session['searchWord'])
+    if data['rc']:
+        return JsonResponse(data)
+    else:
+        print(bc.ERRMSG, data['rv'], bc.END)
+        return HttpResponseServerError()
