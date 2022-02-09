@@ -17,9 +17,6 @@ td
     font-size: 30px;
     text-align: center;
     height: 86px;
-    max-width: 20%;
-    min-width: 20%;
-    width: 20%;
 }
 
 table
@@ -29,6 +26,13 @@ table
 }
 
 /* classes */
+
+.leterGui
+{    
+    max-width: 20%;
+    min-width: 20%;
+    width: 20%;
+}
 
 .letterExect
 {
@@ -45,6 +49,46 @@ table
     background-color: black;
 }
 
+.firstPlace
+{
+    color: gold; 
+}
+
+.secondPlace
+{
+    color: silver;
+}
+
+.thirdPlace
+{
+    color: #BF8970;
+}
+
+.dark-Modal
+{
+    background-color: black;
+}
+
+.highScoreList_Place
+{
+    width: 96.13px;
+}
+
+.highScoreList_Name
+{
+    width: 96.13px;
+}
+
+.highScoreList_Rounds
+{
+    width: 109.32px;
+}
+
+.highScoreList_Time
+{
+    width: 142.31px;
+}
+
 /* ids */
 
 #game-body
@@ -56,15 +100,10 @@ table
 {
     text-align: center;
     font-size: 30px;
+    margin-bottom: 15px;
 }
 
 #btnNewGame
 {
     margin-top: 15px;  
-
-}
-
-.dark-Modal
-{
-    background-color: black;
 }

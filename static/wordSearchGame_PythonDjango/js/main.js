@@ -122,7 +122,7 @@ class wordsearchGame {
             if (!endGame_Result['rc']){throw(endGame_Result['rv'])}
             let notify = new Notify();
             notify.changeModalType(notify.noteType.fehler)
-            notify.changeModalText('Du hast verloren')
+            notify.changeModalText('<strong>Du hast verloren</strong><br>Das gesuchte word war: ' + this.searchWord + '<br><br> Viel Glück beim nächten mal.')
             notify.makeModal();
             notify.showModal();
             return {
@@ -199,7 +199,79 @@ class wordsearchGame {
     #getHighScoreList(){
         try{
             let highScore_Result = this.#getDataFormURL('getHighScoreTopTenFromWord');
-            if (!highScore_Result['rc']){throw(highScore_Result['rv'])}
+            if (!highScore_Result['rc']){throw(highScore_Result['rv']);}
+            let highScore = highScore_Result['rv'];
+            for (let i = 0; i < highScore.length; i++) {
+                let placeObject = document.getElementById('place' + i)
+               
+                if (i == 0){
+                    var html_highScorePlace = `
+                    <td>
+                        <p class="firstPlace">`+(i+1)+`.</p>
+                    </td>
+                    <td>
+                        <p class="firstPlace">`+highScore[i]['userName']+`</p>
+                    </td>
+                    <td>
+                        <p class="firstPlace">`+highScore[i]['usedRounds']+`</p>
+                    </td>
+                    <td>
+                        <p class="firstPlace">`+highScore[i]['usedTime']+`</p>
+                    </td>`;
+                }
+                else if (i == 1){
+                    var html_highScorePlace = `
+                    <td>
+                        <p class="secondPlace">`+(i+1)+`.</p>
+                    </td>
+                    <td>
+                        <p class="secondPlace">`+highScore[i]['userName']+`</p>
+                    </td>
+                    <td>
+                        <p class="secondPlace">`+highScore[i]['usedRounds']+`</p>
+                    </td>
+                    <td>
+                        <p class="secondPlace">`+highScore[i]['usedTime']+`</p>
+                    </td>`;
+                }
+                else if (i == 2){                    
+                    var html_highScorePlace = `
+                    <td>
+                        <p class="thirdPlace">`+(i+1)+`.</p>
+                    </td>
+                    <td>
+                        <p class="thirdPlace">`+highScore[i]['userName']+`</p>
+                    </td>
+                    <td>
+                        <p class="thirdPlace">`+highScore[i]['usedRounds']+`</p>
+                    </td>
+                    <td>
+                        <p class="thirdPlace">`+highScore[i]['usedTime']+`</p>
+                    </td>`;
+                }
+                else{
+                    var html_highScorePlace = `
+                    <td>
+                        <p>`+(i+1)+`.</p>
+                    </td>
+                    <td>
+                        <p>`+highScore[i]['userName']+`</p>
+                    </td>
+                    <td>
+                        <p>`+highScore[i]['usedRounds']+`</p>
+                    </td>
+                    <td>
+                        <p>`+highScore[i]['usedTime']+`</p>
+                    </td>`;
+                
+                }
+                placeObject.innerHTML=html_highScorePlace;
+                
+            }
+            return {
+                'rc': true,
+                'rv': highScore_Result['rv']
+            }
         }
         catch (error){
             console.error(error);
@@ -220,7 +292,8 @@ class wordsearchGame {
             //if (!getWordDataList_Result['rc']){throw(getWordDataList_Result['rv'])}
             let newWord = this.#getNewWord();
             if (!newWord['rc']){throw(newWord['rv'])}
-            console.log('I didn\'t created this game for you to cheat! Take this and die: ' + newWord['rv']);
+            this.searchWord = newWord['rv']
+            console.log('I didn\'t created this game for you to cheat! Take this and die: ' + this.searchWord);
             let getHighScoreList_Result = this.#getHighScoreList();
             if (!getHighScoreList_Result['rc']){throw(getHighScoreList_Result['rv'])}
             
@@ -319,6 +392,8 @@ class wordsearchGame {
             let insterHighScoore_Result = this.#getDataFormURL('insertHighScore', question);
             if (!insterHighScoore_Result['rc']){throw(insterHighScoore_Result['rv'])}
             
+            this.#getHighScoreList()
+
             let notify = new Notify();
             notify.changeModalType(notify.noteType.erfolg);
             notify.changeModalText('<strong>HighScore Hochgeladen</strong><br>Vielen Dank fürs spielen.<br>Mit einem Klick auf "Neues Spiel" können Sie ein neues Spiel starten.')

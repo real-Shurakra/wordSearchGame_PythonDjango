@@ -34,6 +34,7 @@ class Main:
             answer = {
                 'rc': True,
                 'rv': random.choice(wordList)
+                #'rv': 'Bauer'
             }
         except Exception as error:
             answer = {
@@ -142,12 +143,24 @@ class Main:
             'rv':True
         }
   
-    def getHighScoreListForWord(searchWord):
-        htmlHighScore = """
-        """
-        searchWordObject = Words.objects.get(searchWord)
+    def getHighScoreListForWord(self, searchWord):
+        list_HighScore = []
+        searchWordObject = Words.objects.get(description = searchWord)
         hightScores = Highscore.objects.filter(word = searchWordObject).order_by('rounds', 'time')
-        return
+        basicFun = BasicFunctions()
+        counter = 0
+        for score in hightScores:
+            list_HighScore.append(dict())
+            
+            list_HighScore[counter]['userName'] = score.username
+            list_HighScore[counter]['usedRounds'] = str(score.rounds)
+            list_HighScore[counter]['usedTime'] = basicFun.intToTime(score.time.hour) + ':' + basicFun.intToTime(score.time.minute) + ':' + basicFun.intToTime(score.time.second)
+            
+            counter += 1
+        return {
+            'rc':True,
+            'rv':list_HighScore
+        }
         
 class DatabaseFunctions:
     

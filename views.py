@@ -25,7 +25,6 @@ def getWordDataList(request):
         print(bc.ERRMSG, data['rv'], bc.END)
         return HttpResponseServerError()
     
-
 @csrf_exempt
 def getNewWord(request):
     temp = engine.Main()
